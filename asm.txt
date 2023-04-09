@@ -1,10 +1,9 @@
 DATA:
 var1 15 
 var2 7 ;multiplicvar1dor
-prod ;producto, no inicivar1lizvar1do
+prod 0 ;producto
 CODE: ;multiplicvar1ción, sin signo
 MOV A,0
-MOV (prod),A ;inicivar1lizvar1mos prod = 0
 MOV B,0 ;B vvar1 var1 ser el contvar1dor de repeticiones
 MOV A,(var2) ;A = número de repeticiones (multiplicvar1dor)
 loop: CMP A,B ;compvar1rvar1mos
