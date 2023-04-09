@@ -1,17 +1,866 @@
 DATA:
-var1 15 
-var2 7 ;multiplicvar1dor
-prod 0 ;producto
-CODE: ;multiplicvar1ción, sin signo
-MOV A,0
-MOV B,0 ;B vvar1 var1 ser el contvar1dor de repeticiones
-MOV A,(var2) ;A = número de repeticiones (multiplicvar1dor)
-loop: CMP A,B ;compvar1rvar1mos
-JEQ end ;si son iguvar1les, terminvar1mos (svar1ltvar1mos var1 end)
-MOV A,(var1) ;tomvar1mos el multiplicvar1ndo
-ADD A,(prod) ;se lo sumvar1mos unvar1 vez más var1 prod
-MOV (prod),A ;y var1ctuvar1lizvar1mos el vvar1lor de prod
-INC B ;incrementvar1mos el contvar1dor de repeticiones
-MOV A,(var2) ;A = número de repeticiones
-JMP loop ;repetimos el ciclo
-end:
+
+t 234
+i 0
+
+t1 5
+t2 4
+t3 3
+t4 2
+t5 1
+
+CODE:
+
+JMP _A
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+mal:		;; Resultados						;;
+ MOV A,(t)								;;
+ MOV B,(i)								;;
+ JMP null								;;
+									;;
+bien:									;;
+ MOV A,170								;;
+ MOV B,17								;;
+ JMP null								;;
+									;;
+null:									;;
+ JMP null								;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+_A:		;; Seccion  :MOV					;;
+MOV A,0									;;
+MOV B,0									;;
+JMP A0									;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+A0:
+ MOV B,4
+ MOV A,B
+ CMP A,B
+ JEQ A1
+ JMP mal
+
+A1:
+ INC (i)
+ MOV A,0
+ MOV B,A
+ CMP A,B
+ JEQ A2
+ JMP mal
+
+A2:
+ INC (i)
+ MOV A,0
+ MOV (t5),A
+ MOV B,(t5)
+ CMP A,B
+ JEQ A3
+ JMP mal
+
+A3:
+ INC (i)
+ MOV A,1
+ MOV (6),A
+ MOV B,(t5)
+ CMP A,B
+ JEQ A4
+ JMP mal
+
+A4:
+ INC (i)
+ MOV B,0
+ MOV (t5),B
+ MOV A,(t5)
+ CMP A,B
+ JEQ A5
+ JMP mal
+
+A5:
+ INC (i)
+ MOV B,1
+ MOV (6),B
+ MOV A,(t5)
+ CMP A,B
+ JEQ A6
+ JMP mal
+
+A6:
+ JMP A_fin
+
+A_fin:
+ JMP _B
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+_B:		;; Sección : CMP					;;
+MOV A,235								;;
+MOV (t),A								;;
+MOV A,0									;;
+MOV (i),A								;;
+MOV B,0									;;
+JMP B0									;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+B0:
+ MOV A,3
+ CMP A,4
+ JEQ mal
+ CMP A,2
+ JEQ mal
+ CMP A,3
+ JEQ B1
+ JMP mal
+
+B1:
+ INC (i)
+ MOV A,3
+ CMP A,(t2)
+ JEQ mal
+ CMP A,(t4)
+ JEQ mal
+ CMP A,(t3)
+ JEQ B2
+ JMP mal
+
+B2:
+ INC (i)
+ MOV A,3
+ CMP A,(3)
+ JEQ mal
+ CMP A,(5)
+ JEQ mal
+ CMP A,(4)
+ JEQ B3
+ JMP mal
+
+B3:
+ JMP B_fin
+ 
+B_fin:
+ JMP _C
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+_C:		;; Sección : JMP					;;
+MOV A,236								;;
+MOV (t),A								;;
+MOV A,0									;;
+MOV (i),A								;;
+MOV B,0									;;
+JMP C0									;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+C0:
+ MOV A,3
+ CMP A,3
+ JNE mal
+ CMP A,2
+ JNE C0_1
+ JMP mal
+ C0_1:
+ CMP A,4
+ JNE C1
+ JMP mal
+
+C1:
+ INC (i)
+ MOV A,3
+ CMP A,4
+ JGT mal
+ CMP A,3
+ JGT mal
+ CMP A,2
+ JGT C2
+ JMP mal
+
+C2:
+ INC (i)
+ MOV A,3
+ CMP A,4
+ JGE mal
+ CMP A,3
+ JGE C2_1
+ JMP mal
+ C2_1:
+ CMP A,2
+ JGE C3
+ JMP mal
+
+C3:
+ INC (i)
+ MOV A,3
+ CMP A,2
+ JLT mal
+ CMP A,3
+ JLT mal
+ CMP A,4
+ JLT C4
+ JMP mal
+
+C4:
+ INC (i)
+ MOV A,3
+ CMP A,2
+ JLE mal
+ CMP A,3
+ JLE C4_1
+ JMP mal
+ C4_1:
+ CMP A,4
+ JLE C5
+ JMP mal
+
+C5:
+ INC (i)
+ MOV A,3
+ CMP A,4
+ JCR mal
+ CMP A,3
+ JCR C5_1
+ JMP mal
+ C5_1:
+ CMP A,2
+ JCR C6
+ JMP mal
+
+C6:
+ JMP C_fin
+
+C_fin:
+ JMP _D
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+_D:		;; Seccion : INC Y DEC					;;
+MOV A,237								;;
+MOV (t),A								;;
+MOV A,0									;;
+MOV (i),A								;;
+MOV B,0									;;
+JMP D0									;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+D0:
+ INC A
+ CMP A,1
+ JEQ D1
+ JMP mal
+
+D1:
+ INC (i)
+ INC B
+ MOV A,B
+ CMP A,1
+ JEQ D2
+ JMP mal
+
+D2:
+ INC (i)
+ DEC A
+ CMP A,0
+ JEQ D3
+ JMP mal
+
+D3:
+ JMP D_fin
+
+D_fin:
+ JMP _E
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+_E:		;; Seccion : 2 Registros				;;
+MOV A,238								;;
+MOV (t),A								;;
+MOV A,0									;;
+MOV (i),A								;;
+MOV B,0									;;
+JMP E0									;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+E0:
+ MOV A,1
+ MOV B,2
+ ADD A,B
+ CMP A,3
+ JNE mal
+ ADD A,B
+ JEQ mal
+ ADD A,B
+ JCR mal
+ ADD A,B
+ JLT mal
+ MOV A,0
+ MOV B,0
+ ADD A,B
+ JNE mal
+ ADD A,B
+ JLT mal
+ MOV A,65535
+ MOV B,1
+ ADD A,B
+ JCR E1
+ JMP mal
+
+E1:
+ INC (i)
+ MOV A,2
+ MOV B,1
+ ADD B,A
+ MOV A,3
+ CMP A,B
+ JEQ E2
+ JMP mal
+
+E2:
+ INC (i)
+ ADD A,2
+ CMP A,5
+ JEQ E3
+ JMP mal
+
+E3:
+ INC (i)
+ ADD B,2
+ MOV A,B
+ CMP A,7
+ JEQ E4
+ JMP mal
+
+E4:
+ INC (i)
+ ADD A,(t1)
+ CMP A,12
+ JEQ E5
+ JMP mal
+
+E5:
+ INC (i)
+ ADD A,(3)
+ CMP A,16
+ JEQ E6
+ JMP mal
+
+E6:
+ INC (i)
+ ADD B,(t3)
+ MOV A,B
+ CMP A,19
+ JEQ E7
+ JMP mal
+
+E7:
+ INC (i)
+ ADD B,(5)
+ MOV A,B
+ CMP A,21
+ JEQ E8
+ JMP mal
+
+E8:
+ INC (i)
+ MOV B,1
+ ADD (t5)
+ MOV A,(t5)
+ CMP A,22
+ JEQ E9
+ JMP mal
+
+E9:
+ INC (i)
+ MOV A,1
+ MOV B,2
+ ADD (6)
+ MOV A,(t5)
+ CMP A,3
+ JEQ E10
+ JMP mal
+
+E10:
+ INC (i)
+ MOV A,5
+ MOV B,2
+ SUB A,B
+ CMP A,3
+ JNE mal
+ SUB A,B
+ JEQ mal
+ SUB A,B
+ JCR mal
+ SUB A,B
+ JLT mal
+ MOV A,0
+ MOV B,0
+ SUB A,B
+ JNE mal
+ SUB A,B
+ JLT mal
+ MOV A,2
+ MOV B,1
+ SUB A,B
+ JCR E11
+ JMP mal
+
+E11:
+ INC (i)
+ MOV A,25
+ MOV B,2
+ SUB B,A
+ MOV A,23
+ CMP A,B
+ JEQ E12
+ JMP mal
+
+E12:
+ INC (i)
+ SUB A,3
+ CMP A,20
+ JEQ E13
+ JMP mal
+
+E13:
+ INC (i)
+ SUB B,2
+ MOV A,B
+ CMP A,18
+ JEQ E14
+ JMP mal
+
+E14:
+ INC (i)
+ SUB A,(t3)
+ CMP A,15
+ JEQ E15
+ JMP mal
+
+E15:
+ INC (i)
+ SUB A,(3)
+ CMP A,11
+ JEQ E16
+ JMP mal
+
+E16:
+ INC (i)
+ SUB B,(t3)
+ MOV A,B
+ CMP A,8
+ JEQ E17
+ JMP mal
+
+E17:
+ INC (i)
+ SUB B,(5)
+ MOV A,B
+ CMP A,6
+ JEQ E18
+ JMP mal
+
+E18:
+ INC (i)
+ MOV B,1
+ SUB (t5)
+ MOV A,(t5)
+ CMP A,5
+ JEQ E19
+ JMP mal
+
+E19:
+ INC (i)
+ MOV A,2
+ MOV B,1
+ SUB (6)
+ MOV A,(t5)
+ CMP A,1
+ JEQ E20
+ JMP mal
+
+E20:
+ INC (i)
+ MOV A,240
+ MOV B,225
+ AND A,B
+ CMP A,224
+ JEQ E21
+ JMP mal
+
+E21:
+ INC (i)
+ MOV B,196
+ AND B,A
+ MOV A,192
+ CMP A,B
+ JEQ E22
+ JMP mal
+
+E22:
+ INC (i)
+ AND A,144
+ CMP A,128
+ JEQ E23
+ JMP mal
+
+E23:
+ INC (i)
+ MOV A,13
+ AND B,11
+ MOV A,B
+ CMP A,9
+ JEQ E24
+ JMP mal
+
+E24:
+ INC (i)
+ AND A,(t3)
+ CMP A,1
+ JEQ E25
+ JMP mal
+
+E25:
+ INC (i)
+ MOV A,6
+ AND A,(3)
+ CMP A,4
+ JEQ E26
+ JMP mal
+
+E26:
+ INC (i)
+ MOV A,10
+ AND B,(t3)
+ MOV A,B
+ CMP A,2
+ JEQ E27
+ JMP mal
+
+E27:
+ INC (i)
+ MOV A,7
+ AND B,(5)
+ MOV A,B
+ CMP A,2
+ JEQ E28
+ JMP mal
+
+E28:
+ INC (i)
+ MOV A,15
+ MOV B,23
+ AND (t5)
+ MOV A,(t5)
+ CMP A,7
+ JEQ E29
+ JMP mal
+
+E29:
+ INC (i)
+ MOV B,22
+ AND (6)
+ MOV A,(t5)
+ CMP A,6
+ JEQ E30
+ JMP mal
+
+E30:
+ INC (i)
+ MOV A,1
+ MOV B,3
+ OR A,B
+ CMP A,3
+ JEQ E31
+ JMP mal
+
+E31:
+ INC (i)
+ MOV B,6
+ OR B,A
+ MOV A,7
+ CMP A,B
+ JEQ E32
+ JMP mal
+
+E32:
+ INC (i)
+ OR A,17
+ CMP A,23
+ JEQ E33
+ JMP mal
+
+E33:
+ INC (i)
+ MOV A,13
+ OR B,11
+ MOV A,B
+ CMP A,15
+ JEQ E34
+ JMP mal
+
+E34:
+ INC (i)
+ MOV A,9
+ OR A,(t3)
+ CMP A,11
+ JEQ E35
+ JMP mal
+
+E35:
+ INC (i)
+ MOV A,7
+ OR A,(3)
+ CMP A,7
+ JEQ E36
+ JMP mal
+
+E36:
+ INC (i)
+ MOV A,10
+ OR B,(t3)
+ MOV A,B
+ CMP A,11
+ JEQ E37
+ JMP mal
+
+E37:
+ INC (i)
+ MOV A,5
+ OR B,(5)
+ MOV A,B
+ CMP A,7
+ JEQ E38
+ JMP mal
+
+E38:
+ INC (i)
+ MOV A,10
+ MOV B,12
+ OR (t5)
+ MOV A,(t5)
+ CMP A,14
+ JEQ E39
+ JMP mal
+
+E39:
+ INC (i)
+ MOV B,17
+ OR (6)
+ MOV A,(t5)
+ CMP A,31
+ JEQ E40
+ JMP mal
+
+E40:
+ INC (i)
+ MOV A,15
+ MOV B,21
+ XOR A,B
+ CMP A,26
+ JEQ E41
+ JMP mal
+
+E41:
+ INC (i)
+ XOR B,A
+ MOV A,15
+ CMP A,B
+ JEQ E42
+ JMP mal
+
+E42:
+ INC (i)
+ XOR A,3
+ CMP A,12
+ JEQ E43
+ JMP mal
+
+E43:
+ INC (i)
+ XOR B,7
+ MOV A,B
+ CMP A,11
+ JEQ E44
+ JMP mal
+
+E44:
+ INC (i)
+ XOR A,(t3)
+ CMP A,8
+ JEQ E45
+ JMP mal
+
+E45:
+ INC (i)
+ XOR A,(3)
+ CMP A,12
+ JEQ E46
+ JMP mal
+
+E46:
+ INC (i)
+ XOR B,(t3)
+ MOV A,B
+ CMP A,15
+ JEQ E47
+ JMP mal
+
+E47:
+ INC (i)
+ XOR B,(5)
+ MOV A,B
+ CMP A,13
+ JEQ E48
+ JMP mal
+
+E48:
+ INC (i)
+ MOV B,3
+ XOR (t5)
+ MOV A,(t5)
+ CMP A,14
+ JEQ E49
+ JMP mal
+
+E49:
+ INC (i)
+ MOV B,5
+ XOR (6)
+ MOV A,(t5)
+ CMP A,11
+ JEQ E50
+ JMP mal
+
+E50:
+ JMP E_fin
+
+E_fin:
+ JMP _F
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+_F:		;; Seccion : 1 Registros				;;
+MOV A,239								;;
+MOV (t),A								;;
+MOV A,0									;;
+MOV (i),A								;;
+MOV B,0									;;
+JMP F0									;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+F0:
+ SUB B,2
+ MOV A,1
+ NOT A
+ CMP A,B
+ JEQ F1
+ JMP mal
+
+F1:
+ INC (i)
+ MOV A,1
+ NOT B,A
+ SUB A,3
+ CMP A,B
+ JEQ F2
+ JMP mal
+
+F2:
+ INC (i)
+ MOV A,1
+ SUB B,3
+ NOT (t5),A
+ MOV A,(6)
+ CMP A,B
+ JEQ F3
+ JMP mal
+
+F3:
+ INC (i)
+ MOV A,2
+ SUB B,5
+ NOT (6),A
+ MOV A,(t5)
+ CMP A,B
+ JEQ F4
+ JMP mal
+
+F4:
+ INC (i)
+ MOV A,8192
+ SHL A
+ CMP A,16384
+ JNE mal
+ SHL A
+ JCR mal
+ SHL A
+ JCR F5
+ JMP mal
+
+F5:
+ INC (i)
+ MOV A,2
+ SHL B,A
+ MOV A,4
+ CMP A,B
+ JEQ F6
+ JMP mal
+
+F6:
+ INC (i)
+ SHL (t5),A
+ MOV A,8
+ CMP A,(t5)
+ JEQ F7
+ JMP mal
+
+F7:
+ INC (i)
+ SHL (6),A
+ MOV A,16
+ CMP A,(t5)
+ JEQ F8
+ JMP mal
+
+F8:
+ INC (i)
+ MOV A,4
+ SHR A
+ CMP A,2
+ JNE mal
+ SHR A
+ JCR mal
+ SHR A
+ JCR F9
+ JMP mal
+
+F9:
+ INC (i)
+ MOV A,16
+ SHR B,A
+ MOV A,8
+ CMP A,B
+ JMP F10
+ JMP mal
+
+F10:
+ INC (i)
+ SHR (t5),A
+ MOV A,4
+ CMP A,(t5)
+ JMP F11
+ JMP mal
+
+F11:
+ INC (i)
+ SHR (6),A
+ MOV A,2
+ CMP A,(t5)
+ JMP F12
+ JMP mal
+
+F12:
+ JMP F_fin  
+
+F_fin:
+ JMP bien
+
+
+
+
+
+
