@@ -4,4 +4,4 @@ MOV A,0
 MOV B,0
 MOV A,1
 MOV B,2
-ADD A,b
+ADD A,B
