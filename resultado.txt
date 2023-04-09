@@ -1,0 +1,21 @@
+Memoria de datos:
+	 DIR | VALUE 
+	-------------
+	 -- empty -- 
+
+N° CLOCK | PC   | INST            | A    | B    | ZNCV | SP   | END?
+---------------------------------------------------------------------
+       1 |    0 | MOV a,0         | -103 |   78 | 1101 |  255 | false
+       2 |    1 | MOV b,0         |    0 |   78 | 1000 |  255 | false
+       3 |    2 | MOV a,5         |    0 |    0 | 1000 |  255 | false
+       4 |    3 | MOV b,6         |    5 |    0 | 0000 |  255 | false
+       5 |    4 | ADD a,b         |    5 |    6 | 0000 |  255 | false
+       6 |    5 | ; NOP           |   11 |    6 | 0000 |  255 | true
+
+Memoria de datos:
+	 DIR | VALUE 
+	-------------
+	 -- empty -- 
+
+Logs:
+	-- empty --
