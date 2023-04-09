@@ -1,0 +1,56 @@
+[
+    // tuplas en la forma:
+    // (regex, operation, vec: info_parse, struct: semantic)
+    ("(?i)^MOV\\s+(A)\\s*,\\s*(B)$",                Alu(Add), [Reg, Reg], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^MOV\\s+(B)\\s*,\\s*(A)$",                Alu(Add), [Reg, Reg], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^MOV\\s+(A|B)\\s*,\\s*(-?\\d+)$",         Alu(Add), [Reg, Lit], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^MOV\\s+(A|B)\\s*,\\s*\\((-?\\d+)\\)$",   Alu(Add), [Reg, MemDirect], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^MOV\\s+\\((-?\\d+)\\)\\s*,\\s*(A|B)$",   Alu(Add), [MemDirect, Reg], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^MOV\\s+(A|B)\\s*,\\s*\\((B)\\)$",        Alu(Add), [Reg, MemIndirect], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^MOV\\s+\\((B)\\)\\s*,\\s*(A)$",          Alu(Add), [MemIndirect, Reg], (op_1: Ref(1), dest: Ref(0))),
+    
+    // add
+    ("(?i)^ADD\\s+(A)\\s*,\\s*(B)$",            Alu(Add), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^ADD\\s+(B)\\s*,\\s*(A)$",            Alu(Add), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^ADD\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(Add), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+   
+    // sub
+    ("(?i)^SUB\\s+(A)\\s*,\\s*(B)$",            Alu(Sub), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^SUB\\s+(B)\\s*,\\s*(A)$",            Alu(Sub), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^SUB\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(Sub), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+
+    // and
+    ("(?i)^AND\\s+(A)\\s*,\\s*(B)$",            Alu(And), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^AND\\s+(B)\\s*,\\s*(A)$",            Alu(And), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^AND\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(And), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+
+    // or
+    ("(?i)^OR\\s+(A)\\s*,\\s*(B)$",             Alu(Or),  [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^OR\\s+(B)\\s*,\\s*(A)$",             Alu(Or),  [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^OR\\s+(A)\\s*,\\s*(-?\\d+)$",        Alu(Or),  [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+
+    // xor
+    ("(?i)^XOR\\s+(A)\\s*,\\s*(B)$",            Alu(Xor), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^XOR\\s+(B)\\s*,\\s*(A)$",            Alu(Xor), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^XOR\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(Xor), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+
+    // not
+    ("(?i)^NOT\\s+(A|B)\\s*,\\s*(A)$",          Alu(NotA), [Reg, Reg], (op_1: Ref(1), dest: Ref(0))),
+
+    // shl
+    ("(?i)^SHL\\s+(A|B)\\s*,\\s*(A)$",          Alu(Shl1), [Reg, Reg], (op_1: Ref(1), dest: Ref(0))),
+
+    // shr
+    ("(?i)^SHR\\s+(A|B)\\s*,\\s*(A)$",          Alu(Shr1), [Reg, Reg], (op_1: Ref(1), dest: Ref(0))),
+
+    // inc
+    ("(?i)^INC\\s+(B)$",                        Alu(Add), [Reg], (op_1: Ref(0), op_2: Lit(1), dest: Ref(0))),
+
+    // jumps
+    ("(?i)JMP\\s+(-?\\d+)$",                    Salto(Jmp), [Lit], (n_pc: Ref(0))),
+    ("(?i)JEQ\\s+(-?\\d+)$",                    Salto(Jeq), [Lit], (op_1: Reg("A"), op_2: Reg("B"), n_pc: Ref(0))),
+    ("(?i)JNE\\s+(-?\\d+)$",                    Salto(Jne), [Lit], (op_1: Reg("A"), op_2: Reg("B"), n_pc: Ref(0))),
+
+    // misc
+    ("(?i)^NOP$",                               Nop, [], ()),
+]

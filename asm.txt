@@ -1,0 +1,7 @@
+DATA:
+CODE:
+MOV a,0
+MOV b,0
+MOV a,5
+MOV b,6
+ADD a,b
