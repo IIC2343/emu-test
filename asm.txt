@@ -1,18 +1,18 @@
 DATA:
-a 15 ;multiplicando
-b 7 ;multiplicador
-prod ;producto, no inicializado
-CODE: ;multiplicación, sin signo
+var1 15 
+var2 7 ;multiplicvar1dor
+prod ;producto, no inicivar1lizvar1do
+CODE: ;multiplicvar1ción, sin signo
 MOV A,0
-MOV (prod),A ;inicializamos prod = 0
-MOV B,0 ;B va a ser el contador de repeticiones
-MOV A,(b) ;A = número de repeticiones (multiplicador)
-loop: CMP A,B ;comparamos
-JEQ end ;si son iguales, terminamos (saltamos a end)
-MOV A,(a) ;tomamos el multiplicando
-ADD A,(prod) ;se lo sumamos una vez más a prod
-MOV (prod),A ;y actualizamos el valor de prod
-INC B ;incrementamos el contador de repeticiones
-MOV A,(b) ;A = número de repeticiones
+MOV (prod),A ;inicivar1lizvar1mos prod = 0
+MOV B,0 ;B vvar1 var1 ser el contvar1dor de repeticiones
+MOV A,(var2) ;A = número de repeticiones (multiplicvar1dor)
+loop: CMP A,B ;compvar1rvar1mos
+JEQ end ;si son iguvar1les, terminvar1mos (svar1ltvar1mos var1 end)
+MOV A,(var1) ;tomvar1mos el multiplicvar1ndo
+ADD A,(prod) ;se lo sumvar1mos unvar1 vez más var1 prod
+MOV (prod),A ;y var1ctuvar1lizvar1mos el vvar1lor de prod
+INC B ;incrementvar1mos el contvar1dor de repeticiones
+MOV A,(var2) ;A = número de repeticiones
 JMP loop ;repetimos el ciclo
 end:
