@@ -1,7 +1,7 @@
 DATA:
 CODE:
-MOV a,0
-MOV b,0
-MOV a,5
-MOV b,11
-ADD a,b
+MOV A,0
+MOV B,0
+MOV A,1
+MOV B,2
+ADD A,b
