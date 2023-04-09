@@ -13,44 +13,87 @@
     ("(?i)^ADD\\s+(A)\\s*,\\s*(B)$",            Alu(Add), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^ADD\\s+(B)\\s*,\\s*(A)$",            Alu(Add), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^ADD\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(Add), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
-   
+    ("(?i)^ADD\\s+(A)\\s*,\\s*\\((-?\\d+)\\)$", Alu(Add), [Reg, MemDirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^ADD\\s+(A)\\s*,\\s*\\((B)\\)$",      Alu(Add), [Reg, MemIndirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^ADD\\s+\\((-?\\d+)\\)$",             Alu(Add), [MemDirect], (op_1: Reg("A"), op_2: Reg("B"), dest: Ref(0))),
+    
     // sub
     ("(?i)^SUB\\s+(A)\\s*,\\s*(B)$",            Alu(Sub), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^SUB\\s+(B)\\s*,\\s*(A)$",            Alu(Sub), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^SUB\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(Sub), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^SUB\\s+(A)\\s*,\\s*\\((-?\\d+)\\)$", Alu(Sub), [Reg, MemDirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^SUB\\s+(A)\\s*,\\s*\\((B)\\)$",      Alu(Sub), [Reg, MemIndirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^SUB\\s+\\((-?\\d+)\\)$",             Alu(Sub), [MemDirect], (op_1: Reg("A"), op_2: Reg("B"), dest: Ref(0))),
 
     // and
     ("(?i)^AND\\s+(A)\\s*,\\s*(B)$",            Alu(And), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^AND\\s+(B)\\s*,\\s*(A)$",            Alu(And), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^AND\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(And), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^AND\\s+(A)\\s*,\\s*\\((-?\\d+)\\)$", Alu(And), [Reg, MemDirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^AND\\s+(A)\\s*,\\s*\\((B)\\)$",      Alu(And), [Reg, MemIndirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^AND\\s+\\((-?\\d+)\\)$",             Alu(And), [MemDirect], (op_1: Reg("A"), op_2: Reg("B"), dest: Ref(0))),
 
     // or
     ("(?i)^OR\\s+(A)\\s*,\\s*(B)$",             Alu(Or),  [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^OR\\s+(B)\\s*,\\s*(A)$",             Alu(Or),  [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^OR\\s+(A)\\s*,\\s*(-?\\d+)$",        Alu(Or),  [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^OR\\s+(A)\\s*,\\s*\\((-?\\d+)\\)$",  Alu(Or),  [Reg, MemDirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^OR\\s+(A)\\s*,\\s*\\((B)\\)$",       Alu(Or),  [Reg, MemIndirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^OR\\s+\\((-?\\d+)\\)$",              Alu(Or),  [MemDirect], (op_1: Reg("A"), op_2: Reg("B"), dest: Ref(0))),
 
     // xor
     ("(?i)^XOR\\s+(A)\\s*,\\s*(B)$",            Alu(Xor), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^XOR\\s+(B)\\s*,\\s*(A)$",            Alu(Xor), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
     ("(?i)^XOR\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(Xor), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^XOR\\s+(A)\\s*,\\s*\\((-?\\d+)\\)$", Alu(Xor), [Reg, MemDirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^XOR\\s+(A)\\s*,\\s*\\((B)\\)$",      Alu(Xor), [Reg, MemIndirect], (op_1: Ref(0), op_2: Ref(1), dest: Ref(0))),
+    ("(?i)^XOR\\s+\\((-?\\d+)\\)$",             Alu(Xor), [MemDirect], (op_1: Reg("A"), op_2: Reg("B"), dest: Ref(0))),
 
     // not
     ("(?i)^NOT\\s+(A|B)\\s*,\\s*(A)$",          Alu(NotA), [Reg, Reg], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^NOT\\s+\\((-?\\d+)\\)$",             Alu(NotA), [MemDirect], (op_1: Reg("A"), dest: Ref(0))),
 
     // shl
     ("(?i)^SHL\\s+(A|B)\\s*,\\s*(A)$",          Alu(Shl1), [Reg, Reg], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^SHL\\s+\\((-?\\d+)\\)$",             Alu(Shl1), [MemDirect], (op_1: Reg("A"), dest: Ref(0))),
 
     // shr
     ("(?i)^SHR\\s+(A|B)\\s*,\\s*(A)$",          Alu(Shr1), [Reg, Reg], (op_1: Ref(1), dest: Ref(0))),
+    ("(?i)^SHR\\s+\\((-?\\d+)\\)$",             Alu(Shr1), [MemDirect], (op_1: Reg("A"), dest: Ref(0))),
 
     // inc
     ("(?i)^INC\\s+(B)$",                        Alu(Add), [Reg], (op_1: Ref(0), op_2: Lit(1), dest: Ref(0))),
+    ("(?i)^INC\\s+\\((B)\\)$",                  Alu(Add), [MemIndirect], (op_1: Ref(0), op_2: Lit(1), dest: Ref(0))),
+    ("(?i)^INC\\s+\\((-?\\d+)\\)$",             Alu(Add), [MemDirect], (op_1: Ref(0), op_2: Lit(1), dest: Ref(0))),
+
+    // inc sp
+    ("(?i)^; INC SP$",                          Stack(IncSp), [], ()),
+
+    // cmps
+    ("(?i)^CMP\\s+(A)\\s*,\\s*(B)$",            Alu(Sub), [Reg, Reg], (op_1: Ref(0), op_2: Ref(1))),
+    ("(?i)^CMP\\s+(A)\\s*,\\s*(-?\\d+)$",       Alu(Sub), [Reg, Lit], (op_1: Ref(0), op_2: Ref(1))),
+    ("(?i)^CMP\\s+(A)\\s*,\\s*\\((-?\\d+)\\)$", Alu(Sub), [Reg, MemDirect], (op_1: Ref(0), op_2: Ref(1))),
+    ("(?i)^CMP\\s+(A)\\s*,\\s*\\((B)\\)$",      Alu(Sub), [Reg, MemIndirect], (op_1: Ref(0), op_2: Ref(1))),
 
     // jumps
     ("(?i)JMP\\s+(-?\\d+)$",                    Salto(Jmp), [Lit], (n_pc: Ref(0))),
-    ("(?i)JEQ\\s+(-?\\d+)$",                    Salto(Jeq), [Lit], (op_1: Reg("A"), op_2: Reg("B"), n_pc: Ref(0))),
-    ("(?i)JNE\\s+(-?\\d+)$",                    Salto(Jne), [Lit], (op_1: Reg("A"), op_2: Reg("B"), n_pc: Ref(0))),
+    ("(?i)JEQ\\s+(-?\\d+)$",                    Salto(Jeq), [Lit], (n_pc: Ref(0))),
+    ("(?i)JNE\\s+(-?\\d+)$",                    Salto(Jne), [Lit], (n_pc: Ref(0))),
+    ("(?i)JGT\\s+(-?\\d+)$",                    Salto(Jgt), [Lit], (n_pc: Ref(0))),
+    ("(?i)JLT\\s+(-?\\d+)$",                    Salto(Jlt), [Lit], (n_pc: Ref(0))),
+    ("(?i)JGE\\s+(-?\\d+)$",                    Salto(Jge), [Lit], (n_pc: Ref(0))),
+    ("(?i)JLE\\s+(-?\\d+)$",                    Salto(Jle), [Lit], (n_pc: Ref(0))),
+    ("(?i)JCR\\s+(-?\\d+)$",                    Salto(Jcr), [Lit], (n_pc: Ref(0))),
+    ("(?i)JOV\\s+(-?\\d+)$",                    Salto(Jov), [Lit], (n_pc: Ref(0))),
+    ("(?i)^CALL\\s+(-?\\d+)$",                  Salto(Call), [Lit], (n_pc: Ref(0))),
+    ("(?i)^RET$",                               Salto(Ret), [], (n_pc: MemSp)),
+
+    // stack movements
+    ("(?i)^PUSH\\s+(A|B)$",                     Stack(Push), [Reg], (op_1: Ref(0), dest: MemSp)),
+    ("(?i)^POP\\s+(A|B)$",                      Stack(Pop), [Reg], (op_1: MemSp, dest: Ref(0))),
 
     // misc
     ("(?i)^NOP$",                               Nop, [], ()),
+
+    // ya no tenemos las instrucciones de I/O
 ]
