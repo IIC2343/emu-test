@@ -34,3 +34,12 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: Dar permisos al archivo ejecutable
+        run: chmod 777 emu-cli-linux
+      - name: run emulator 
+        run: ./emu-cli-linux asm.txt > resultado.txt
+      - name: Escribir resultado en repositorio
+        uses: actions/upload-artifact@v2
+        with:
+          name: Resultado de la ejecución
+          path: resultado.txt
