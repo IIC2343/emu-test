@@ -1,6 +1,6 @@
 DATA:
-var1 3
-var2 2
+var1 6
+var2 6
 CODE:
 MOV A,(var1)
 MOV B,(var2)
