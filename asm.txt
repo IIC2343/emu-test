@@ -5,3 +5,4 @@ CODE:
 MOV A,(var1)
 MOV B,(var2)
 ADD (var1)
+ADD (var1)
